@@ -12,6 +12,19 @@ const SESSION_DAYS = 7
 const HISTORY_KEEP = 30
 const MAX_UPLOAD = 10 * 1024 * 1024
 const MAX_CONTENT = 5 * 1024 * 1024
+// โดเมนหลักของเว็บ — www. และลิงก์ workers.dev ของ Worker นี้จะ redirect (301) มาที่นี่
+// เปลี่ยนได้ด้วยตัวแปร CANONICAL_HOST ใน Cloudflare; ตั้งเป็น "off" เพื่อปิดการ redirect
+const CANONICAL_HOST = 'studio7rmutt.org'
+
+function canonicalRedirect(url, env) {
+  const host = (env.CANONICAL_HOST || CANONICAL_HOST).trim().toLowerCase()
+  if (!host || host === 'off' || url.hostname === host) return null
+  // เฉพาะ www.<โดเมนหลัก> และ <ชื่อ worker>.<บัญชี>.workers.dev (ลิงก์ preview ของแต่ละเวอร์ชันไม่ถูก redirect)
+  const isWww = url.hostname === 'www.' + host
+  const isWorkersDev = /^rmuttstudio7-web\.[a-z0-9-]+\.workers\.dev$/.test(url.hostname)
+  if (!isWww && !isWorkersDev) return null
+  return Response.redirect(`https://${host}${url.pathname}${url.search}`, 301)
+}
 
 const json = (data, status = 200, headers = {}) =>
   new Response(JSON.stringify(data), { status, headers: { 'content-type': 'application/json; charset=utf-8', 'cache-control': 'no-store', ...headers } })
@@ -166,6 +179,8 @@ async function renderPage(req, env, url) {
 export default {
   async fetch(req, env) {
     const url = new URL(req.url)
+    const moved = canonicalRedirect(url, env)
+    if (moved) return moved
     const { pathname } = url
     const method = req.method
 

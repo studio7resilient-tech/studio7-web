@@ -1,7 +1,7 @@
 # CLAUDE.md
 
 React 18 + Vite 5 SPA + Cloudflare Worker for "Resilient Architecture by Studio 7" (RMUTT), migrated from Google Sites.
-Live: https://rmuttstudio7-web.peetzaz.workers.dev — Worker `rmuttstudio7-web` (`wrangler.jsonc`). Workers Builds runs `npm run build` then `npx wrangler deploy` on push to `main`.
+Live: https://studio7rmutt.org (GitHub `studio7resilient-tech/studio7-web`) — Worker `rmuttstudio7-web` (`wrangler.jsonc`). `www.` and `rmuttstudio7-web.*.workers.dev` 301-redirect to the canonical host (`CANONICAL_HOST` in `worker/index.js`, overridable by a Cloudflare variable; `off` disables). Workers Builds runs `npm run build` then `npx wrangler deploy` on push to `main`.
 
 ## Architecture
 - **Routing**: real paths (`/`, `/about-us`, `/projects/2025`, `/thesis/tinn`, `/admin`). `src/routes.js` (pure, shared with the Worker) parses paths; `src/router.js` intercepts same-origin `<a href="/...">` clicks (pushState). Old `#thesis-x` hash links are redirected client-side.
@@ -29,7 +29,7 @@ Live: https://rmuttstudio7-web.peetzaz.workers.dev — Worker `rmuttstudio7-web`
 - Live on `main` (868ba99): migrated site, path URLs + WebP, admin dashboard (KV + `ADMIN_PASSWORD` set as a **Runtime** Secret, not a Build variable), drafting-style redesign, first-visit intro, globe, upload thumbnails, light dashboard with page-register overview and live preview pane.
 - Workflow agreed with the owner: work on a branch, show screenshots/video, **ask before merging to `main`** (every push to `main` deploys).
 - Local test password lives in `.dev.vars` (gitignored). Reset local KV with `rm -rf .wrangler/state`. `wrangler dev` crashes if `dist/` is rebuilt while it runs — restart it after `npm run build`.
-- Cloud sessions so far could not reach the live `*.workers.dev` URL; verify locally with `wrangler dev` + Playwright.
+- Cloud sessions need the `studio7-web` environment (allows `studio7rmutt.org` + `www.`) to check the live site; otherwise verify locally with `wrangler dev` + Playwright.
 - Open content questions for the owner: 19.01.27 labelled WED (is Tuesday) and 21.07.25 labelled TUE (is Monday) on the original site; footer email shown as info@rastudio7.co.th but the original mailto was info@ras7.co.th; two 2026 thesis cards have no title; 4 participants in 2025 have no photo; Projects 2027 and Alumni Gen 4 are placeholders.
-- Account move (GitHub + Cloudflare) planned: see `MIGRATION.md`. Dashboard → "ประวัติ · สำรอง" exports/imports one JSON (`/api/backup`: KV content + history + media as base64).
+- Account move (GitHub + Cloudflare) done 2026-11 (new owner `studio7resilient-tech`, domain `studio7rmutt.org` via Cloudflare Registrar); steps kept in `MIGRATION.md`. Dashboard → "ประวัติ · สำรอง" exports/imports one JSON (`/api/backup`: KV content + history + media as base64).
 - Offered but not built: TH/EN language toggle, site search, flip-book portfolio viewer, custom domain.
