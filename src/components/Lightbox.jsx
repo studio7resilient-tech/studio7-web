@@ -1,4 +1,5 @@
 import { useEffect, useState, useCallback, useRef } from 'react'
+import { createPortal } from 'react-dom'
 import { imgUrl as img, thumbUrl as thumb } from '../media.js'
 
 // ดูรูปเต็มจอ: ปุ่มลูกศร / คีย์บอร์ด / ปัดนิ้ว + แถบรูปย่อ
@@ -33,7 +34,8 @@ function Lightbox({ items, index, onClose, onMove, onGo }) {
     else if (dy > 90) onClose()
   }
 
-  return (
+  // วางไว้ที่ <body> โดยตรง: .page มี animation (transform) ทำให้ position: fixed ข้างในไม่เต็มจอและโดนเมนูทับ
+  return createPortal(
     <div className="lightbox" role="dialog" aria-modal="true" aria-label="ดูรูป" onClick={onClose}>
       <div className="lb-top" onClick={(e) => e.stopPropagation()}>
         <span className="lb-count">{String(index + 1).padStart(2, '0')} / {String(items.length).padStart(2, '0')}</span>
@@ -56,7 +58,8 @@ function Lightbox({ items, index, onClose, onMove, onGo }) {
           </div>
         </>
       )}
-    </div>
+    </div>,
+    document.body
   )
 }
 
