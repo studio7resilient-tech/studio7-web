@@ -130,7 +130,6 @@ html.booted .split-w > span { animation: word-up 1.05s var(--ease-out) both; ani
 .btn:hover i { transform: translate(3px, 0); }
 .btn-light { --bg: #fff; --fg: #000; }
 .btn-outline { --bg: transparent; --fg: #fff; border-color: rgba(255,255,255,.7); }
-.btn-ghost { --bg: transparent; --fg: var(--ink); border-color: var(--ink); }
 .btn-dark { --bg: var(--ink); --fg: var(--paper); }
 .btn-small { min-height: 44px; padding: 0 16px; font-size: .85rem; }
 .btn:active, .chip:active, .nav-login:active, .to-top:active, .copy-btn:active { transform: translateY(1px); }
@@ -286,8 +285,8 @@ html.booted .split-w > span { animation: word-up 1.05s var(--ease-out) both; ani
 .sec-no { display: inline-grid; place-items: center; min-width: 2.6em; padding: 2px 6px; background: var(--accent); color: #000; font-weight: 600; letter-spacing: .05em; }
 .sec-head h2 { font-size: clamp(2rem, 5.2vw, 4rem); font-weight: 800; font-stretch: 108%; letter-spacing: -.025em; }
 .sec-lead { margin: 16px 0 0; color: var(--ink-2); max-width: 60ch; font-size: 1.05rem; }
-.chrome-band .sec-kicker, .map-band .sec-kicker { color: var(--chrome-2); }
-.chrome-band .sec-lead, .map-band .sec-lead { color: #a9b3b8; }
+.chrome-band .sec-kicker { color: var(--chrome-2); }
+.chrome-band .sec-lead { color: #a9b3b8; }
 
 .split { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr); gap: clamp(24px, 6vw, 80px); align-items: start; }
 .split .sec-head h2 { font-size: clamp(1.8rem, 3.6vw, 2.8rem); }
