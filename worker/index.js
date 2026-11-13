@@ -149,7 +149,9 @@ async function renderPage(req, env, url) {
   const content = mergeContent(stored)
   const route = parsePath(url.pathname, content)
   const meta = metaFor(route, content)
-  const shell = await env.ASSETS.fetch(new Request(new URL('/', url), req))
+  // ขอไฟล์ index.html แบบไม่มีเงื่อนไข: ถ้าส่ง If-None-Match ต่อไป จะได้ 304 ว่างเปล่า แล้วหน้าเว็บจะขาว
+  const shellReq = new Request(new URL('/', url), { headers: { accept: 'text/html' } })
+  const shell = await env.ASSETS.fetch(shellReq)
   const abs = (p) => (p ? new URL(p, url.origin).href : '')
   const tags = [
     `<meta name="description" content="${esc(meta.description)}">`,
@@ -171,6 +173,7 @@ async function renderPage(req, env, url) {
     .transform(shell)
   const headers = new Headers(res.headers)
   headers.set('cache-control', 'no-cache')
+  headers.delete('etag') // เนื้อหาจาก KV เปลี่ยนได้ แม้ไฟล์ index.html เดิม
   if (meta.noindex) headers.set('x-robots-tag', 'noindex')
   return new Response(res.body, { status: route.page === 'notfound' ? 404 : 200, headers })
 }

@@ -28,7 +28,7 @@ function EventCard({ ev, today, onPhoto, i }) {
   const status = end < today ? 'past' : start <= today ? 'now' : 'upcoming'
   const label = { past: 'ผ่านไปแล้ว', now: 'กำลังจัดอยู่', upcoming: 'กำลังจะมาถึง' }[status]
   return (
-    <li className={`event is-${status} accent-${ev.color || 'cyan'}`} data-reveal style={{ '--d': i % 4 }}>
+    <li className={`event is-${status} accent-${ev.color || 'cyan'}`}>
       <span className="event-dot" aria-hidden="true" />
       <article className="event-card">
         <div className="event-date">
@@ -146,7 +146,7 @@ export default function Events() {
           <SectionHead no="02" kicker="Workshop Gallery" title="บรรยากาศ Workshop" lead={`${GALLERY.length} ภาพจากห้องเรียน Studio 7`} />
           <div className="masonry">
             {(showAll ? GALLERY : GALLERY.slice(0, 9)).map((g, i) => (
-              <button key={g + i} className="masonry-item zoom" onClick={() => show(GALLERY, i)} aria-label={`ดูรูปที่ ${i + 1}`} data-reveal style={{ '--d': i % 3 }}>
+              <button key={g + i} className="masonry-item zoom" onClick={() => show(GALLERY, i)} aria-label={`ดูรูปที่ ${i + 1}`}>
                 <img src={thumb(g)} alt="" loading="lazy" />
                 <span className="masonry-no mono">{String(i + 1).padStart(2, '0')}</span>
               </button>
@@ -165,7 +165,7 @@ export default function Events() {
         <SectionHead no="04" kicker="Special Lectures" title="Special lecture" />
         <ol className="lecture-list" data-edit="LECTURE_LINKS">
           {LECTURE_LINKS.map((l, i) => (
-            <li key={l.no} data-reveal style={{ '--d': i }}>
+            <li key={l.no}>
               <a href={l.href} target="_blank" rel="noreferrer">
                 <span className="vdo mono">VDO_{l.no}</span>
                 <span className="lt">{l.title}</span>
@@ -175,7 +175,7 @@ export default function Events() {
           ))}
         </ol>
         <div className="videos" data-edit="VIDEOS">
-          {VIDEOS.map((v, i) => <div key={v.id} data-reveal style={{ '--d': i % 2 }}><Video id={v.id} title={v.title} /></div>)}
+          {VIDEOS.map((v, i) => <div key={v.id}><Video id={v.id} title={v.title} /></div>)}
         </div>
         </div>
       </section>
@@ -185,7 +185,7 @@ export default function Events() {
           <SectionHead no="05" kicker="References" title="เอกสารอ้างอิง" />
           <div className="refs" data-edit="REFERENCE_DOCS">
             {REFERENCE_DOCS.map((r, i) => (
-              <a key={r.href} className="ref-card" href={r.href} target="_blank" rel="noreferrer" data-reveal style={{ '--d': i }}>
+              <a key={r.href} className="ref-card" href={r.href} target="_blank" rel="noreferrer">
                 <span className="ref-img zoom"><img src={thumb(r.img)} alt="" loading="lazy" /></span>
                 <span className="ref-title">{r.title}</span>
                 <span className="ref-cta mono">PDF ↗</span>
@@ -206,7 +206,7 @@ export default function Events() {
             </div>
             <div className="floating-imgs">
               {FLOATING.images.map((f, i) => (
-                <button key={f} className="zoom" onClick={() => show(FLOATING.images, i)} aria-label="ดูรูปขนาดใหญ่" data-reveal style={{ '--d': i }}>
+                <button key={f} className="zoom" onClick={() => show(FLOATING.images, i)} aria-label="ดูรูปขนาดใหญ่">
                   <img src={thumb(f)} alt={FLOATING.title} loading="lazy" />
                 </button>
               ))}

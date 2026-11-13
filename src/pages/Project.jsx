@@ -17,8 +17,8 @@ function Person({ p, i }) {
     </>
   )
   return p.link
-    ? <a className="person" href={p.link} data-reveal style={{ '--d': i % 4 }}>{inner}</a>
-    : <div className="person" data-reveal style={{ '--d': i % 4 }}>{inner}</div>
+    ? <a className="person" href={p.link}>{inner}</a>
+    : <div className="person">{inner}</div>
 }
 
 export default function Project({ year }) {
@@ -63,7 +63,7 @@ export default function Project({ year }) {
           {w.photos?.length > 0 && (
             <div className="trio">
               {w.photos.map((f, i) => (
-                <button key={f} className="zoom" onClick={() => show(w.photos, i)} aria-label="ดูรูปขนาดใหญ่" data-reveal style={{ '--d': i }}><img src={thumb(f)} alt="" loading="lazy" /></button>
+                <button key={f} className="zoom" onClick={() => show(w.photos, i)} aria-label="ดูรูปขนาดใหญ่"><img src={thumb(f)} alt="" loading="lazy" /></button>
               ))}
             </div>
           )}
@@ -71,7 +71,7 @@ export default function Project({ year }) {
             <>
               <div className="masonry">
                 {(all ? gallery : gallery.slice(0, 9)).map((f, i) => (
-                  <button key={f + i} className="masonry-item zoom" onClick={() => show(gallery, i)} aria-label={`ดูรูปที่ ${i + 1}`} data-reveal style={{ '--d': i % 3 }}>
+                  <button key={f + i} className="masonry-item zoom" onClick={() => show(gallery, i)} aria-label={`ดูรูปที่ ${i + 1}`}>
                     <img src={thumb(f)} alt="" loading="lazy" />
                   </button>
                 ))}
@@ -104,8 +104,8 @@ export default function Project({ year }) {
                   </>
                 )
                 return t.link
-                  ? <a key={i} className="thesis-card" href={t.link} data-reveal style={{ '--d': i % 4 }}>{body}</a>
-                  : <button key={i} type="button" className="thesis-card" onClick={() => show(d.thesis.map((x) => x.img), i)} data-reveal style={{ '--d': i % 4 }}>{body}</button>
+                  ? <a key={i} className="thesis-card" href={t.link}>{body}</a>
+                  : <button key={i} type="button" className="thesis-card" onClick={() => show(d.thesis.map((x) => x.img), i)}>{body}</button>
               })}
             </div>
           ) : (

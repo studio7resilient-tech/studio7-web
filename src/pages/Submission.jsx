@@ -10,7 +10,7 @@ export default function Submission() {
         <p className="lead-text" data-reveal>{SUBMISSION.intro}</p>
         <div className="submit-list">
           {SUBMISSION.items.map((s, i) => (
-            <a key={s.no + s.title} className="submit-card" href={s.href} target="_blank" rel="noreferrer" data-reveal style={{ '--d': i }}>
+            <a key={s.no + s.title} className="submit-card" href={s.href} target="_blank" rel="noreferrer">
               <span className="submit-no">{s.no}</span>
               <span className="submit-body">
                 <strong>{s.title}</strong>

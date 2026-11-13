@@ -12,7 +12,7 @@ export default function Alumni() {
         <p className="lead-text" data-reveal>{ALUMNI.intro}</p>
         <div className="generations">
           {ALUMNI.generations.map((g, gi) => (
-            <section key={g.title} className="generation" data-reveal style={{ '--d': gi % 2 }}>
+            <section key={g.title} className="generation">
               <h2>{g.title}<span className="mono">{g.people.length}</span></h2>
               <ol>
                 {g.people.map((p) => (
@@ -32,7 +32,7 @@ export default function Alumni() {
           <SectionHead no="01" kicker="Team" title="Tutors, Experts, and Public lecturers" />
           <div className="people">
             {ALUMNI.tutors.map((t, i) => (
-              <div key={t.name} className="person" data-reveal style={{ '--d': i % 4 }}>
+              <div key={t.name} className="person">
                 <PersonPhoto photo={t.photo} name={t.name} />
                 <span className="person-name">{t.name}</span>
               </div>
@@ -41,7 +41,7 @@ export default function Alumni() {
           <SectionHead no="02" kicker="Guests" title="Special guest" />
           <ul className="guests">
             {ALUMNI.guests.map((g, i) => (
-              <li key={g.name} data-reveal style={{ '--d': i }}><strong>{g.name}</strong><span>{g.role}</span></li>
+              <li key={g.name}><strong>{g.name}</strong><span>{g.role}</span></li>
             ))}
           </ul>
         </div>

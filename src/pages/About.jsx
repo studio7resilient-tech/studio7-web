@@ -24,7 +24,7 @@ export default function About() {
           <SectionHead no="02" kicker="Approach" title={ABOUT.principlesTitle} />
           <ol className="principles">
             {ABOUT.principles.map((p, i) => (
-              <li key={p.title} data-reveal style={{ '--d': i }}>
+              <li key={p.title}>
                 <span className="principle-no mono">{String(i + 1).padStart(2, '0')}</span>
                 <h3>{p.title}</h3>
                 <p>{p.text}</p>
@@ -42,7 +42,7 @@ export default function About() {
         </blockquote>
         <div className="pillars">
           {ABOUT.pillars.map((p, i) => (
-            <figure key={p.title} data-reveal style={{ '--d': i }}>
+            <figure key={p.title}>
               <span className="zoom"><img src={thumb(p.img)} alt="" loading="lazy" /></span>
               <figcaption><span className="mono">{String(i + 1).padStart(2, '0')}</span>{p.title}</figcaption>
             </figure>
@@ -54,7 +54,7 @@ export default function About() {
         <div className="wrap">
           <SectionHead no="03" kicker="Mission" title="We Aim To..." />
           <ol className="aims">
-            {ABOUT.aims.map((a, i) => <li key={a} data-reveal style={{ '--d': i }}><span className="mono">{String(i + 1).padStart(2, '0')}</span>{a}</li>)}
+            {ABOUT.aims.map((a, i) => <li key={a}><span className="mono">{String(i + 1).padStart(2, '0')}</span>{a}</li>)}
           </ol>
         </div>
       </section>

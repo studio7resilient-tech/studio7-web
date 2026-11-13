@@ -11,7 +11,7 @@ function Grid({ items, cls, onOpen, caption }) {
   return (
     <div className={cls}>
       {items.map((f, i) => (
-        <figure key={f + i} data-reveal style={{ '--d': i % 4 }}>
+        <figure key={f + i}>
           <button type="button" className="zoom" onClick={() => onOpen(items, i)} aria-label="ดูรูปขนาดใหญ่">
             <img src={thumb(f)} alt="" loading="lazy" />
           </button>
